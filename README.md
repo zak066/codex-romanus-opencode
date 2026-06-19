@@ -128,8 +128,8 @@ The team follows 5 orchestrated phases:
 
 | Doc | Description |
 |-----|-------------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | System architecture & MCP server design |
-| [AGENTS.md](AGENTS.md) | Agent roles, Lex Agentium protocol, delegation |
-| [MCP-SERVERS.md](MCP-SERVERS.md) | All 6 MCP servers in detail |
-| [GETTING-STARTED.md](GETTING-STARTED.md) | Full setup guide |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture & MCP server design |
+| [AGENTS.md](docs/AGENTS.md) | Agent roles, Lex Agentium protocol, delegation |
+| [MCP-SERVERS.md](docs/MCP-SERVERS.md) | All 6 MCP servers in detail |
+| [GETTING-STARTED.md](docs/GETTING-STARTED.md) | Full setup guide |
+| [CONTRIBUTING.md](docs/CONTRIBUTING.md) | How to contribute |
