@@ -175,24 +175,19 @@ MCP servers are configured in the `mcp` section of `opencode.json`. Each server 
 Create a `.env` file in each subproject (or a single `.env` in the project root):
 
 ```bash
-# Tabularium
-TABULARIUM_PORT=3001
-TABULARIUM_DB_PATH=./memory.db
 
 # Ianus Liminalis
 IANUS_PORT=3002
 IANUS_WORKSPACE=.
 
-# Speculum
-SPECULUM_PORT=3003
-
 # Imago (optional)
 IMAGO_COMFYUI_URL=http://127.0.0.1:8188
 IMAGO_PORT=3004
 
-# Praetorium (optional)
+# Praetorium (optional) env.local
 PRAETORIUM_PORT=3005
 PRAETORIUM_TABULARIUM_URL=http://localhost:3001
+ARTIFICIAL_ANALYSIS_API_KEY=your-api-key
 ```
 
 > **Windows users**: Use `copy .env.example .env` instead of `cp`.

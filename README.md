@@ -1,15 +1,24 @@
-# Codex Romanus v2.0
+# Codex Romanus v0.1.0
 
 > **A multi-agent AI team** for [opencode](https://opencode.ai): 12 agents (6 Roman gods + 6 historical figures) covering the full software development lifecycle — planning, architecture, implementation, frontend, quality, security, performance, DevOps, SEO, testing, and documentation.
 
-I'm neither a fan nor a detractor of AI, but I can't deny that I had fun. The Codex Romanus project was born from an idea based on ancient Rome.
+
+
+I'd seen several projects with agents named developer, architect, etc., so for fun I thought about ancient Rome, so why not give them names based on the figures and gods of that era?
+Hence the idea for Codex Romanus.
+I'm neither a fan nor a detractor of AI, but I can't deny that I had fun with this project.
+Seeing the agent close his work with a typical Latin proverb or a phrase inspired by ancient Rome is very amusing.
+"This work will last as long as the aqueducts of Rome," to name one, or that time the model I was using at a certain point wrote in a strange language that at times resembled Latin.
+A small clarification: many files are probably still written in Italian, but I'll translate them soon.
+
+> **I sincerely hope you'll have fun with the Codex Romanus team.**
 
 
 ## Quick Summary
 
 | Attribute | Value |
 |-----------|-------|
-| **Version** | 2.0.0 |
+| **Version** | 0.1.0 |
 | **License** | MIT |
 | **Runtime** | Node.js 22+, opencode Go |
 | **Stack** | TypeScript ESM, MCP Protocol (Stdio/SSE) |

@@ -146,21 +146,14 @@ codex-romanus/
 
 ## Key Design Decisions (ADR)
 
-Codex Romanus uses **Architecture Decision Records** (ADR) to track every significant design choice. Current count: **39+ ADRs**, all stored in Tabularium's SQLite.
+Codex Romanus uses **Architecture Decision Records** (ADR) to track every significant design choice. All stored in Tabularium's SQLite.
 
 | ADR | Decision | Status |
 |:---:|----------|:------:|
 | 001 | SQLite as embedded database | ✅ Accepted |
-| 007 | Tabularium as team memory server | ✅ Accepted |
-| 009 | Ianus Liminalis as filesystem MCP | ✅ Accepted |
-| 012 | ADR Lifecycle with 4 states + graph | ✅ Accepted |
-| 024 | TypeScript ESM + Node 22+ + MCP SDK | ✅ Accepted |
-| 029 | Real-time messaging between agents | ✅ Accepted |
-| 030 | Knowledge Graph for entity relationships | ✅ Accepted |
-| 036 | Memory Compact Protocol (MCP²) | ✅ Accepted |
-| 040 | Revival: web search without API key | ✅ Accepted |
-| 045 | Praetorium — unified command center | ✅ Accepted |
-| 046 | Deprecation of Arae and legacy Dashboard | ✅ Accepted |
+| 002 | Tabularium as team memory server | ✅ Accepted |
+| 003 | Ianus Liminalis as filesystem MCP | ✅ Accepted |
+
 
 ## Multi-PC Workflow
 
