@@ -1,0 +1,142 @@
+#!/bin/sh
+# pre-push hook — Codex Romanus
+# Verifica integrità prima di ogni push su GitLab
+# Install: git config core.hooksPath .githooks
+
+REMOTE_NAME="$1"
+REMOTE_URL="$2"
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+
+echo ""
+echo "╔══════════════════════════════════════════════╗"
+echo "║   🔍 Codex Romanus — Pre-Push Integrity     ║"
+echo "╚══════════════════════════════════════════════╝"
+echo "Remote: $REMOTE_NAME → $REMOTE_URL"
+echo ""
+
+ERRORS=0
+WARNINGS=0
+
+# ─── 1. WAL checkpoint memory.db ──────────────────────────
+echo "📋 [1/7] Checkpoint SQLite WAL (memory.db)..."
+CHECKPOINT_SCRIPT="$REPO_ROOT/scripts/checkpoint-db.cjs"
+if [ -f "$CHECKPOINT_SCRIPT" ]; then
+    node "$CHECKPOINT_SCRIPT" 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo "  ✅ WAL checkpoint completato"
+    else
+        echo "  ⚠️  WAL checkpoint fallito (proseguo comunque)"
+    fi
+else
+    echo "  ⚠️  checkpoint-db.cjs non trovato — skip"
+fi
+
+# ─── 2. Working tree pulito ───────────────────────────────
+echo "📋 [2/7] Verifica working tree..."
+STATUS=$(git status --porcelain 2>/dev/null)
+if [ -n "$STATUS" ]; then
+    COUNT=$(echo "$STATUS" | wc -l)
+    echo "  ⚠️  $COUNT file non committati:"
+    echo "$STATUS" | while IFS= read -r line; do echo "      $line"; done
+    WARNINGS=$((WARNINGS + 1))
+else
+    echo "  ✅ Working tree pulito"
+fi
+
+# ─── 3. Branch con remote tracciato ──────────────────────
+echo "📋 [3/7] Verifica branch con remote..."
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+BRANCHES=$(git branch --format="%(refname:short)" 2>/dev/null)
+UNTRACKED=""
+for branch in $BRANCHES; do
+    if [ "$branch" = "HEAD" ]; then continue; fi
+    REMOTE=$(git config "branch.$branch.remote" 2>/dev/null)
+    if [ -z "$REMOTE" ]; then
+        UNTRACKED="$UNTRACKED $branch"
+    fi
+done
+if [ -n "$UNTRACKED" ]; then
+    echo "  ⚠️  Branch locali senza remote:$UNTRACKED"
+    WARNINGS=$((WARNINGS + 1))
+else
+    echo "  ✅ Tutti i branch tracciano un remote"
+fi
+echo "  → Branch corrente: $CURRENT_BRANCH"
+
+# ─── 4. Commit non pushati ────────────────────────────────
+echo "📋 [4/7] Verifica commit non pushati..."
+if git rev-parse "origin/$CURRENT_BRANCH" >/dev/null 2>&1; then
+    UNPUSHED=$(git log "origin/$CURRENT_BRANCH..HEAD" --oneline 2>/dev/null)
+    if [ -n "$UNPUSHED" ]; then
+        COUNT=$(echo "$UNPUSHED" | wc -l)
+        echo "  ℹ️  $COUNT commit da pushare:"
+        echo "$UNPUSHED"
+    else
+        echo "  ✅ Nessun commit in attesa"
+    fi
+else
+    echo "  ℹ️  Branch senza tracking remoto — push iniziale"
+fi
+
+# ─── 5. Tag non pushati ──────────────────────────────────
+echo "📋 [5/7] Verifica tag non pushati..."
+LOCAL_TAGS=$(git tag --list 2>/dev/null)
+REMOTE_TAGS=$(git ls-remote --tags origin 2>/dev/null | sed 's|.*refs/tags/||')
+UNPUSHED_TAGS=""
+for tag in $LOCAL_TAGS; do
+    if ! echo "$REMOTE_TAGS" | grep -qxF "$tag"; then
+        UNPUSHED_TAGS="$UNPUSHED_TAGS $tag"
+    fi
+done
+if [ -n "$UNPUSHED_TAGS" ]; then
+    echo "  ⚠️  Tag non pushati:$UNPUSHED_TAGS"
+    WARNINGS=$((WARNINGS + 1))
+else
+    echo "  ✅ Tutti i tag sono su remote"
+fi
+
+# ─── 6. File critici mancanti ────────────────────────────
+echo "📋 [6/7] Verifica file fondamentali..."
+for file in "AGENTS.md" "README.md" "opencode.json" ".gitignore" ".codex-romanus.rc"; do
+    if [ -f "$REPO_ROOT/$file" ]; then
+        echo "  ✅ $file — presente"
+    else
+        echo "  ❌ $file — MANCANTE"
+        ERRORS=$((ERRORS + 1))
+    fi
+done
+for file in "docs/codex-romanus/planning.md" "docs/codex-romanus/progress.md" "docs/codex-romanus/decisions.md"; do
+    if [ -f "$REPO_ROOT/$file" ]; then
+        echo "  ✅ $file — presente"
+    else
+        echo "  ⚠️  $file — mancante (opzionale)"
+    fi
+done
+
+# ─── 7. Versione Node.js ─────────────────────────────────
+echo "📋 [7/7] Verifica Node.js..."
+if command -v node >/dev/null 2>&1; then
+    echo "  ✅ Node.js $(node --version)"
+else
+    echo "  ⚠️  Node.js non trovato — alcuni check potrebbero saltare"
+fi
+
+# ─── Riepilogo finale ───────────────────────────────────
+echo ""
+echo "╔══════════════════════════════════════════════╗"
+if [ $ERRORS -gt 0 ]; then
+    echo "║   ❌ ERRORI: $ERRORS problemi gravi             ║"
+    echo "╚══════════════════════════════════════════════╝"
+    echo "🚫 Push bloccato. Correggi gli errori e riprova."
+    exit 1
+elif [ $WARNINGS -gt 0 ]; then
+    echo "║   ⚠️  AVVISI: $WARNINGS — push consentito      ║"
+    echo "╚══════════════════════════════════════════════╝"
+else
+    echo "║   ✅ TUTTO OK — push sicuro                ║"
+    echo "╚══════════════════════════════════════════════╝"
+fi
+
+echo ""
+echo "🚀 Push in corso verso $REMOTE_NAME..."
+exit 0

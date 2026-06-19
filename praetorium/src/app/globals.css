@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+/* ── Geometric background pattern ── */
+.app-layout::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-roman-gold-glow) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-roman-gold-glow) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Central gold glow ── */
+.app-layout::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, var(--color-roman-gold-glow) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Default theme (dark) — fallback before JS loads ── */
+:root {
+  --color-surface-base: #1a1a24;
+  --color-surface-raised: #1f1f2b;
+  --color-surface-overlay: #252533;
+  --color-surface-panel: #2a2a3a;
+  --color-surface-floating: #303042;
+  --color-surface-deep: #16161f;
+  --color-text-primary: #e8e4db;
+  --color-text-secondary: #b0aaa0;
+  --color-text-muted: #787268;
+  --color-text-dim: #4a4640;
+  --color-text-inverse: #030712;
+  --color-border-subtle: #2a2a3a;
+  --color-border-default: #353545;
+  --color-border-focus: #d4a54a;
+  --color-roman-gold: #d4a54a;
+  --color-roman-gold-dark: #b8892e;
+  --color-roman-gold-light: #e8c97a;
+  --color-roman-gold-glow: rgba(212,165,74,0.12);
+  --color-pompeii-blue: #1a3a5c;
+  --color-pompeii-blue-light: #2a5a8c;
+  --color-pompeii-green: #2d5a3a;
+  --color-pompeii-green-light: #3d7a4e;
+  color-scheme: dark;
+}
+
+
+/* ── Light theme CSS variables ── */
+:root[data-theme="light"] {
+  --color-surface-base: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-overlay: #f0ece4;
+  --color-surface-panel: #ffffff;
+  --color-surface-floating: #f0ece4;
+  --color-surface-deep: #f5f0e8;
+  --color-text-primary: #2c2416;
+  --color-text-secondary: #6b5e4a;
+  --color-text-muted: #8a7e6a;
+  --color-text-dim: #a09888;
+  --color-text-inverse: #f5f0e8;
+  --color-border-subtle: #e0d8c8;
+  --color-border-default: #d0c8b8;
+  --color-border-focus: #b8892e;
+  --color-roman-gold: #b8892e;
+  --color-roman-gold-dark: #9a7526;
+  --color-roman-gold-light: #d4a54a;
+  --color-roman-gold-glow: rgba(184,137,46,0.08);
+  --color-pompeii-blue: #2a6a9c;
+  --color-pompeii-blue-light: #4a8abc;
+  --color-pompeii-green: #3d8a5a;
+  --color-pompeii-green-light: #5daa7a;
+  color-scheme: light;
+}
+
+/* ── Semantic colors for themes ── */
+:root[data-theme="light"] {
+  --color-semantic-success: #16a34a;
+  --color-semantic-success-bg: #dcfce7;
+  --color-semantic-error: #dc2626;
+  --color-semantic-error-bg: #fee2e2;
+  --color-semantic-warning: #d97706;
+  --color-semantic-warning-bg: #fef3c7;
+  --color-semantic-info: #2563eb;
+  --color-semantic-info-bg: #dbeafe;
+}
+
+:root[data-theme="dark"] {
+  --color-semantic-success: #22c55e;
+  --color-semantic-success-bg: #052e16;
+  --color-semantic-error: #ef4444;
+  --color-semantic-error-bg: #450a0a;
+  --color-semantic-warning: #f59e0b;
+  --color-semantic-warning-bg: #451a03;
+  --color-semantic-info: #3b82f6;
+  --color-semantic-info-bg: #172554;
+}
+
+/* ── Cyberpunk theme CSS variables ── */
+:root[data-theme="cyberpunk"] {
+  --color-surface-base: #12121a;
+  --color-surface-raised: #181824;
+  --color-surface-overlay: #1a1a28;
+  --color-surface-panel: #222233;
+  --color-surface-floating: #2a2a3d;
+  --color-surface-deep: #0a0a0f;
+  --color-text-primary: #e0e0ff;
+  --color-text-secondary: #8888aa;
+  --color-text-muted: #666688;
+  --color-text-dim: #444466;
+  --color-text-inverse: #0a0a0f;
+  --color-border-subtle: #2a2a40;
+  --color-border-default: #3a3a55;
+  --color-border-focus: #ff2a6d;
+  --color-roman-gold: #ff2a6d;
+  --color-roman-gold-dark: #cc1f57;
+  --color-roman-gold-light: #ff5c8a;
+  --color-roman-gold-glow: rgba(255,42,109,0.15);
+  --color-pompeii-blue: #05d9e8;
+  --color-pompeii-blue-light: #33e0ec;
+  --color-pompeii-green: #01ff70;
+  --color-pompeii-green-light: #33ff8f;
+  color-scheme: dark;
+}
+
+:root[data-theme="cyberpunk"] {
+  --color-semantic-success: #01ff70;
+  --color-semantic-success-bg: #003319;
+  --color-semantic-error: #ff0033;
+  --color-semantic-error-bg: #33000d;
+  --color-semantic-warning: #ff6e27;
+  --color-semantic-warning-bg: #331709;
+  --color-semantic-info: #05d9e8;
+  --color-semantic-info-bg: #001a1f;
+}
+
+@layer base {
+  :root {
+    --color-surface-base: #1a1a24;
+    --color-surface-raised: #1f1f2b;
+    --color-surface-overlay: #252533;
+    --color-surface-panel: #2a2a3a;
+    --color-surface-floating: #303042;
+    --color-surface-deep: #16161f;
+    --color-text-primary: #e8e4db;
+    --color-text-secondary: #b0aaa0;
+    --color-text-muted: #787268;
+    --color-text-dim: #4a4640;
+    --color-text-inverse: #030712;
+    --color-border-subtle: #2a2a3a;
+    --color-border-default: #353545;
+    --color-border-focus: #d4a54a;
+    --color-roman-gold: #d4a54a;
+    --color-roman-gold-dark: #b8892e;
+    --color-roman-gold-light: #e8c97a;
+    --color-roman-gold-glow: rgba(212,165,74,0.12);
+    --color-pompeii-blue: #1a3a5c;
+    --color-pompeii-blue-light: #2a5a8c;
+    --color-pompeii-green: #2d5a3a;
+    --color-pompeii-green-light: #3d7a4e;
+  }
+
+  body {
+    @apply bg-surface-deep text-text-primary min-h-screen antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--color-border-default); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-roman-gold-dark); }
+}

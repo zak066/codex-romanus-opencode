@@ -1,0 +1,32 @@
+{
+  "name": "imago",
+  "version": "0.1.0",
+  "description": "MCP server for ComfyUI — Bridge AI agents to image generation workflows",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "pack": "node scripts/pack.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.0",
+    "dotenv": "^17.4.2",
+    "sharp": "^0.34.5",
+    "ws": "^8.18.0",
+    "zod": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.6"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

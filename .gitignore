@@ -1,0 +1,76 @@
+# OS
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Editor
+.vs/
+*.suo
+*.user
+.vscode/settings.json
+.idea/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Node (if ever used)
+node_modules/
+
+# Ianus Liminalis (log locali e backup — rigenerati automaticamente)
+.ianus-journal/
+.ianus-backups/
+dist/
+build/
+.turbo
+
+# opencode cache
+.opencode-cache/
+opencode-cache/
+
+# Next.js
+.next/
+
+# CodexRomanus
+repository/
+
+# Arae
+.arae-cache.json
+.arae-backups/
+
+# Test coverage
+coverage/
+
+# Archives
+*.zip
+*.tar.gz
+
+# MCP server temp
+tabularium/.env
+
+# Database SQLite
+
+*.db-wal
+*.db-shm
+
+# File temporanei di debug
+_debug_*.js
+_diag*.js
+test_out*.txt
+test_output*.txt
+
+# Archived (ex-tooling deprecato)
+_archived/
+_archive/
+_trash/
+
+# Codex Romanus tooling (arae, tabularium)
+# Queste directory contengono tool esterni, non codice del progetto.
+# Vedi .codex-romanus.rc per i dettagli.
+
+

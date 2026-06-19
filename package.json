@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Codex Romanus — Monorepo root per quality gate",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  }
+}

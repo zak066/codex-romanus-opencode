@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "description": "Codex Romanus — Team di sviluppo basato su agenti AI",
+  "toolDirectories": ["arae", "tabularium"],
+  "toolDescriptions": {
+    "arae": "Interfaccia GUI per la configurazione visiva degli agenti (Next.js)",
+    "tabularium": "Server MCP per la memoria e governance del team (SQLite + API)"
+  },
+  "configFiles": ["opencode.json", "opencode.large.json", "opencode.medium.json", "opencode.small.json"],
+  "agentDefinitions": ".opencode/agents/",
+  "skillDefinitions": ".opencode/skills/"
+}

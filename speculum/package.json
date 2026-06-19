@@ -1,0 +1,26 @@
+{
+  "name": "speculum",
+  "version": "1.0.0",
+  "description": "MCP server for web search, knowledge, and content — no API key required (Codex Romanus)",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@mozilla/readability": "^0.5.0",
+    "cheerio": "^1.0.0",
+    "jsdom": "^25.0.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^28.0.3",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^4.1.6"
+  }
+}

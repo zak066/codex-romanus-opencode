@@ -1,0 +1,25 @@
+# Auto-detect text files and normalize to LF in git, CRLF on Windows checkout
+* text=auto
+
+# SQLite database — binary (no diff, no merge attempts)
+tabularium/memory.db binary
+
+# SQLite WAL and SHM files — binary (if accidentally tracked)
+*.db-wal binary
+*.db-shm binary
+
+# Binary files
+*.png binary
+*.jpg binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.tar.gz binary
+*.db binary
+
+# Shell scripts — LF only
+*.sh text eol=lf
+
+# Batch/PowerShell — CRLF
+*.bat text eol=crlf
+*.ps1 text eol=crlf

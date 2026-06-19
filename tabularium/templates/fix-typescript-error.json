@@ -1,0 +1,10 @@
+{
+  "name": "fix-typescript-error",
+  "description": "Template per fixare errori TypeScript",
+  "files": [],
+  "steps": [
+    "Esegui npx tsc --noEmit per identificare errori",
+    "Correggi tipi nei file segnalati",
+    "Verifica con npx tsc --noEmit"
+  ]
+}

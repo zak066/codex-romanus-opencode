@@ -1,0 +1,8 @@
+{
+  "_comment": "Aggiungi questo al file di configurazione ESLint del tuo progetto per escludere le directory di tooling di Codex Romanus.",
+  "_istruzioni": "Se usi .eslintrc.json, aggiungi ignorePatterns. Se usi .eslintrc.js, aggiungi ignorePatterns: ['arae/**', 'tabularium/**'].",
+  "ignorePatterns": [
+    "arae/**",
+    "tabularium/**"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "version": 2,
+  "defaultEffect": "allow",
+  "rules": [
+    {
+      "id": "deny-sensitive-for-all",
+      "agentPattern": "*",
+      "priority": 10,
+      "effect": "deny",
+      "paths": [
+        "**/.env*",
+        "**/credentials*",
+        "**/secrets*",
+        "**/node_modules/**",
+        ".git/**"
+      ],
+      "operations": ["write", "edit", "delete"]
+    },
+    {
+      "id": "allow-core-dev",
+      "agentPattern": "vulcanus,catone,agrippa,iuppiter",
+      "priority": 40,
+      "effect": "allow",
+      "paths": ["**"],
+      "operations": [
+        "read", "write", "edit", "delete",
+        "backup", "rollback",
+        "search", "tree", "stat", "list", "journal"
+      ]
+    },
+    {
+      "id": "allow-tester-frontend",
+      "agentPattern": "ovidio,plinio,diana",
+      "priority": 50,
+      "effect": "allow",
+      "paths": ["**"],
+      "operations": [
+        "read", "write", "edit", "delete",
+        "search", "tree", "stat", "list", "journal"
+      ]
+    },
+    {
+      "id": "allow-junior-docs",
+      "agentPattern": "mercurius,tacito",
+      "priority": 60,
+      "effect": "allow",
+      "paths": ["**"],
+      "operations": [
+        "read", "write", "edit",
+        "search", "tree", "stat", "list", "journal"
+      ]
+    },
+    {
+      "id": "allow-read-only",
+      "agentPattern": "janus,scipione,minerva",
+      "priority": 70,
+      "effect": "allow",
+      "paths": ["**"],
+      "operations": [
+        "read", "search", "tree", "stat", "list", "journal"
+      ]
+    }
+  ]
+}

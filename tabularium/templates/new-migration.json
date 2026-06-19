@@ -1,0 +1,12 @@
+{
+  "name": "new-migration",
+  "description": "Crea una nuova migration SQL",
+  "files": [
+    { "path": "migrations/{{number}}_{{name}}.sql", "template": false }
+  ],
+  "steps": [
+    "Crea file migration con DDL",
+    "Aggiungi CREATE TABLE/INDEX/TRIGGER",
+    "Registra migration in _migrations"
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "iuppiter-orchestrator",
+  "model": "opencode-go/deepseek-v4-pro",
+  "small_model": "opencode-go/deepseek-v4-flash",
+  "skills": {
+    "paths": [
+      ".opencode/skills"
+    ]
+  },
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "agent": {
+    "build": {
+      "disable": true,
+      "role": "Agente di build automatico"
+    },
+    "plan": {
+      "disable": true,
+      "role": "Agente di pianificazione"
+    },
+    "general": {
+      "disable": true,
+      "role": "Agente generico"
+    },
+    "explore": {
+      "disable": true,
+      "role": "Agente di esplorazione"
+    },
+    "scout": {
+      "disable": true,
+      "role": "Agente di scoperta"
+    },
+    "iuppiter-orchestrator": {
+      "mode": "primary",
+      "model": "opencode-go/deepseek-v4-pro",
+      "variant": "reasoning",
+      "temperature": 0.2,
+      "color": "#C9A84C",
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "git *": "allow",
+          "cat *": "allow",
+          "ls *": "allow",
+          "*": "ask"
+        },
+        "task": "allow"
+      },
+      "skill": "orchestrazione",
+      "role": "Orchestrator del team"
+    },
+    "minerva-architect": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-pro",
+      "variant": "reasoning",
+      "temperature": 0.5,
+      "color": "#4A90D9",
+      "steps": 20,
+      "permission": {
+        "bash": "deny",
+        "edit": "allow",
+        "task": "deny"
+      },
+      "skill": "progettazione",
+      "role": "Architect — decisioni architetturali, ADR, review di design"
+    },
+    "vulcanus-senior-dev": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-pro",
+      "variant": "reasoning",
+      "temperature": 0.3,
+      "color": "#E25822",
+      "steps": 25,
+      "permission": {
+        "bash": "allow",
+        "edit": "allow",
+        "task": "deny"
+      },
+      "skill": "realizzazione",
+      "role": "Senior Developer — implementazioni complesse, refactoring, ottimizzazione"
+    },
+    "catone-quality": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.1,
+      "color": "#DAA520",
+      "steps": 15,
+      "permission": {
+        "bash": "allow",
+        "edit": "allow",
+        "task": "deny"
+      },
+      "skill": "censura",
+      "role": "Quality/Tooling — lint, toolchain, qualità codice, semver, release"
+    },
+    "janus-security": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-pro",
+      "variant": "reasoning",
+      "temperature": 0.1,
+      "color": "#8B4513",
+      "steps": 20,
+      "permission": {
+        "bash": "allow",
+        "edit": "deny",
+        "task": "deny"
+      },
+      "skill": "vigilanza",
+      "role": "Security Auditor — audit sicurezza, dipendenze, vulnerabilità"
+    },
+    "agrippa-devops": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-pro",
+      "temperature": 0.2,
+      "color": "#B8860B",
+      "steps": 20,
+      "permission": {
+        "bash": "allow",
+        "edit": "allow",
+        "task": "deny"
+      },
+      "skill": "opere",
+      "role": "DevOps/Infrastructure — CI/CD, Docker, Terraform, deploy"
+    },
+    "ovidio-frontend": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.4,
+      "color": "#F0E68C",
+      "steps": 15,
+      "permission": {
+        "bash": "allow",
+        "edit": "allow",
+        "task": "deny"
+      },
+      "skill": "arte",
+      "role": "Frontend Developer — UI components, CSS, responsive, accessibilità"
+    },
+    "diana-tester": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.2,
+      "color": "#2E8B57",
+      "steps": 15,
+      "permission": {
+        "bash": "allow",
+        "edit": "allow",
+        "task": "deny"
+      },
+      "skill": "verifica",
+      "role": "Tester — test unitari, integrazione, e2e, coverage"
+    },
+    "tacito-docs": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.3,
+      "color": "#6B5B95",
+      "steps": 10,
+      "permission": {
+        "bash": "deny",
+        "edit": "allow",
+        "task": "deny"
+      },
+      "skill": "annali",
+      "role": "Documenter — README, API docs, changelog, documentazione"
+    }
+  },
+  "mcp": {
+    "tabularium": {
+      "type": "local",
+      "command": ["node", "tabularium/dist/server.js"],
+      "enabled": true
+    },
+    "ianus-liminalis": {
+      "type": "local",
+      "command": ["node", "ianus-liminalis/dist/server.js"],
+      "enabled": true
+    },
+    "imago": {
+      "type": "local",
+      "command": ["node", "imago/dist/index.js"],
+      "enabled": true
+    },
+    "speculum": {
+      "type": "local",
+      "command": ["node", "speculum/dist/server.js"],
+      "enabled": true
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    }
+  }
+}

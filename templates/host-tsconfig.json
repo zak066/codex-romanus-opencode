@@ -1,0 +1,8 @@
+{
+  "_comment": "Aggiungi questa sezione 'exclude' al tsconfig.json del tuo progetto per escludere le directory di tooling di Codex Romanus.",
+  "_istruzioni": "Copia il contenuto di 'exclude' nel tsconfig.json del tuo progetto. Se esiste gia' 'exclude', aggiungi questi pattern.",
+  "exclude": [
+    "arae/**",
+    "tabularium/**"
+  ]
+}

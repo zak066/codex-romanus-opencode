@@ -1,0 +1,13 @@
+{
+  "name": "refactor-extract",
+  "description": "Estrai logica da un file in un nuovo modulo",
+  "files": [
+    { "path": "src/core/{{name}}.ts", "template": true }
+  ],
+  "steps": [
+    "Identifica funzioni da estrarre dal file sorgente",
+    "Crea nuovo modulo src/core/{{name}}.ts",
+    "Importa e usa nel file originale",
+    "Verifica build e test"
+  ]
+}

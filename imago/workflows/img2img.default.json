@@ -1,0 +1,58 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": { "image": "PARAM_STRING_IMAGE" }
+  },
+  "11": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "upscale_method": "lanczos",
+      "width": "PARAM_INT_WIDTH",
+      "height": "PARAM_INT_HEIGHT",
+      "crop": "disabled",
+      "image": ["1", 0]
+    }
+  },
+  "4": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": { "ckpt_name": "PARAM_STRING_MODEL" }
+  },
+  "10": {
+    "class_type": "VAEEncode",
+    "inputs": { "pixels": ["11", 0], "vae": ["4", 2] }
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": "PARAM_INT_SEED",
+      "steps": "PARAM_INT_STEPS",
+      "cfg": "PARAM_FLOAT_CFG",
+      "sampler_name": "PARAM_STRING_SAMPLER",
+      "scheduler": "PARAM_STRING_SCHEDULER",
+      "denoise": 0.8,
+      "model": ["4", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["10", 0]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": { "text": "PARAM_PROMPT", "clip": ["4", 1] }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": { "text": "PARAM_STRING_NEGATIVE_PROMPT", "clip": ["4", 1] }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": { "samples": ["3", 0], "vae": ["4", 2] }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "PARAM_STRING_PREFIX",
+      "images": ["8", 0]
+    }
+  }
+}

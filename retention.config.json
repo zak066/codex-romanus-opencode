@@ -1,0 +1,78 @@
+{
+  "$schema": "retention-config-schema.json",
+  "version": "1.0.0",
+  "description": "Retention policy configuration for the Codex Romanus ecosystem",
+  "areas": {
+    "ianus_backups": {
+      "label": "Ianus Liminalis Backups",
+      "description": "Automatic backup snapshots created by Ianus Liminalis filesystem operations",
+      "path": ".ianus-backups",
+      "compress_after_days": 7,
+      "delete_after_days": 30,
+      "safeguard_min_backups": 1,
+      "compress_format": "tar.gz",
+      "use_compression": true
+    },
+    "tabularium_metrics": {
+      "label": "Tabularium Metrics Time-Series",
+      "description": "Time-series performance, quality, and security metrics stored in Tabularium",
+      "path": "tabularium/memory.db",
+      "table": "metrics",
+      "date_field": "recorded_at",
+      "purge_after_days": 180,
+      "archive_before_purge": true,
+      "archive_dir": "tabularium/backups",
+      "archive_format": "json"
+    },
+    "tabularium_sessions": {
+      "label": "Tabularium Session Events",
+      "description": "Session lifecycle events (session_started, session_ended) from Tabularium",
+      "path": "tabularium/memory.db",
+      "table": "events",
+      "date_field": "timestamp",
+      "filter": "event_type IN ('session_started', 'session_ended')",
+      "archive_after_days": 90,
+      "delete_after_archive": true,
+      "archive_dir": "tabularium/backups",
+      "archive_format": "json"
+    },
+    "tabularium_artifacts": {
+      "label": "Tabularium Temporary Artifacts",
+      "description": "Temporary files: ESLint output, logs, debug dumps, and transient database copies",
+      "path": "tabularium",
+      "patterns": [
+        {
+          "glob": "eslint-output*.json",
+          "max_age_days": 1,
+          "description": "ESLint JSON output files from quality gates"
+        },
+        {
+          "glob": "eslint-errors*.json",
+          "max_age_days": 1,
+          "description": "ESLint error breakdown JSON files"
+        },
+        {
+          "glob": "*.log",
+          "max_age_days": 7,
+          "description": "General log files"
+        },
+        {
+          "glob": "memory_*.db",
+          "max_age_days": 30,
+          "exclude": [
+            "memory.db",
+            "memory.db-wal",
+            "memory.db-shm",
+            "memory.db-wal.bak"
+          ],
+          "description": "Transient database dumps (e.g. benchmark copies)"
+        },
+        {
+          "glob": "memory.db-wal.bak",
+          "max_age_days": 0,
+          "description": "Stale WAL backup files (immediate cleanup)"
+        }
+      ]
+    }
+  }
+}

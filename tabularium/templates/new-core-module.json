@@ -1,0 +1,16 @@
+{
+  "name": "new-core-module",
+  "description": "Crea un nuovo modulo core in src/core/",
+  "files": [
+    { "path": "src/core/{{name}}.ts", "template": true },
+    { "path": "src/tools/{{name}}.tool.ts", "template": true },
+    { "path": "__tests__/core/{{name}}.test.ts", "template": true }
+  ],
+  "steps": [
+    "Crea interfacce TypeScript in src/core/{{name}}.ts",
+    "Implementa funzione principale",
+    "Crea tool handler in src/tools/{{name}}.tool.ts",
+    "Registra in src/tools/index.ts",
+    "Scrivi test in __tests__/core/{{name}}.test.ts"
+  ]
+}

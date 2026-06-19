@@ -1,0 +1,19 @@
+{
+  "_comment": "Aggiungi queste impostazioni al .vscode/settings.json del tuo progetto per escludere le directory di tooling di Codex Romanus da ricerca, watch e file tree.",
+  "search.exclude": {
+    "arae/**": true,
+    "tabularium/**": true
+  },
+  "files.watcherExclude": {
+    "arae/**": true,
+    "tabularium/**": true
+  },
+  "files.exclude": {
+    "arae/node_modules": true,
+    "tabularium/node_modules": true,
+    "arae/.next": true,
+    "tabularium/*.db": true,
+    "tabularium/*.db-wal": true,
+    "tabularium/*.db-shm": true
+  }
+}

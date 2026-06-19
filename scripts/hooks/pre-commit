@@ -1,0 +1,16 @@
+#!/bin/sh
+# scripts/hooks/pre-commit — Git pre-commit hook
+# Checkpoint SQLite WAL before commit to prevent data loss
+# Works on Windows (Git Bash), macOS, Linux
+#
+# Called automatically by git before each commit.
+# Errors do NOT block the commit (exit 0 always).
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CHECKPOINT_SCRIPT="$SCRIPT_DIR/../checkpoint-db.cjs"
+
+if [ -f "$CHECKPOINT_SCRIPT" ]; then
+    node "$CHECKPOINT_SCRIPT" 2>/dev/null || true
+fi
+
+exit 0
