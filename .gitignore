@@ -11,13 +11,14 @@ Desktop.ini
 .idea/
 
 # Environment
-.env
-.env.local
-.env.*.local
 !ianus-liminalis/.env.example
 !imago/.env.example
 !nuntius/.env.example
 !praetorium/.env.local.dev
+.env
+.env.local
+.env.*.local
+
 
 # Logs
 *.log
