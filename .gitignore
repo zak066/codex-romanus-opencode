@@ -14,8 +14,10 @@ Desktop.ini
 .env
 .env.local
 .env.*.local
-!.env.local.example
-!.env.local.dev
+!ianus-liminalis/.env.local.example
+!imago/.env.local.example
+!nuntius/.env.local.example
+!praetorium/.env.local.dev
 
 # Logs
 *.log
